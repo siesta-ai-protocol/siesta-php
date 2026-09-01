@@ -1,0 +1,21 @@
+{
+    "name": "siesta/carbon",
+    "description": "Siesta adapter for nesbot/carbon date/time library",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "nesbot/carbon": "^3.0",
+        "siesta/runtime": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Siesta\\Carbon\\": "src/"
+        }
+    },
+    "extra": {
+        "siesta": {
+            "manifest": "siesta.manifest.json"
+        }
+    }
+}

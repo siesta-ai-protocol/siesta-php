@@ -1,0 +1,194 @@
+{
+  "siesta": "1.0",
+  "library": "siesta-carbon",
+  "version": "1.0.0",
+  "description": "Date and time manipulation via nesbot/carbon",
+  "minSiestaVersion": "1.0",
+  "adapter": {
+    "class": "Siesta\\Carbon\\CarbonLibraryAdapter"
+  },
+  "config": {
+    "defaultTimezone": {
+      "type": "string",
+      "default": "UTC",
+      "description": "Default timezone for factories"
+    },
+    "locale": {
+      "type": "string",
+      "default": "en",
+      "description": "Locale for formatting"
+    },
+    "weekStartsAt": {
+      "type": "integer",
+      "enum": [0, 1, 2, 3, 4, 5, 6],
+      "default": 1,
+      "description": "Day week starts on (0=Sunday, 1=Monday)"
+    }
+  },
+  "factories": {
+    "now": {
+      "returns": "DateTime",
+      "description": "Current date and time",
+      "params": {
+        "type": "object",
+        "properties": {
+          "timezone": { "type": "string", "description": "IANA timezone" }
+        },
+        "required": []
+      }
+    },
+    "parse": {
+      "returns": "DateTime",
+      "description": "Parse a date string",
+      "params": {
+        "type": "object",
+        "properties": {
+          "input": { "type": "string", "description": "Date string to parse" },
+          "timezone": { "type": "string" }
+        },
+        "required": ["input"]
+      }
+    },
+    "createFromFormat": {
+      "returns": "DateTime",
+      "description": "Create from format string",
+      "params": {
+        "type": "object",
+        "properties": {
+          "format": { "type": "string" },
+          "time": { "type": "string" },
+          "timezone": { "type": "string" }
+        },
+        "required": ["format", "time"]
+      }
+    },
+    "createFromDate": {
+      "returns": "DateTime",
+      "description": "Create from year, month, day",
+      "params": {
+        "type": "object",
+        "properties": {
+          "year": { "type": "integer" },
+          "month": { "type": "integer", "minimum": 1 },
+          "day": { "type": "integer", "minimum": 1 },
+          "timezone": { "type": "string" }
+        },
+        "required": ["year", "month", "day"]
+      }
+    },
+    "yesterday": {
+      "returns": "DateTime",
+      "params": {
+        "type": "object",
+        "properties": { "timezone": { "type": "string" } },
+        "required": []
+      }
+    },
+    "tomorrow": {
+      "returns": "DateTime",
+      "params": {
+        "type": "object",
+        "properties": { "timezone": { "type": "string" } },
+        "required": []
+      }
+    }
+  },
+  "types": {
+    "DateTime": {
+      "methods": {
+        "addWeeks": {
+          "returns": "DateTime",
+          "params": {
+            "type": "object",
+            "properties": { "weeks": { "type": "integer", "minimum": 0 } },
+            "required": ["weeks"]
+          }
+        },
+        "addDays": {
+          "returns": "DateTime",
+          "params": {
+            "type": "object",
+            "properties": { "days": { "type": "integer", "minimum": 0 } },
+            "required": ["days"]
+          }
+        },
+        "subDays": {
+          "returns": "DateTime",
+          "params": {
+            "type": "object",
+            "properties": { "days": { "type": "integer", "minimum": 0 } },
+            "required": ["days"]
+          }
+        },
+        "addMonths": {
+          "returns": "DateTime",
+          "params": {
+            "type": "object",
+            "properties": { "months": { "type": "integer", "minimum": 0 } },
+            "required": ["months"]
+          }
+        },
+        "startOfWeek": {
+          "returns": "DateTime",
+          "params": { "type": "object", "properties": {}, "required": [] }
+        },
+        "endOfWeek": {
+          "returns": "DateTime",
+          "params": { "type": "object", "properties": {}, "required": [] }
+        },
+        "startOfMonth": {
+          "returns": "DateTime",
+          "params": { "type": "object", "properties": {}, "required": [] }
+        },
+        "endOfMonth": {
+          "returns": "DateTime",
+          "params": { "type": "object", "properties": {}, "required": [] }
+        },
+        "startOfDay": {
+          "returns": "DateTime",
+          "params": { "type": "object", "properties": {}, "required": [] }
+        },
+        "endOfDay": {
+          "returns": "DateTime",
+          "params": { "type": "object", "properties": {}, "required": [] }
+        },
+        "format": {
+          "returns": "string",
+          "params": {
+            "type": "object",
+            "properties": { "pattern": { "type": "string" } },
+            "required": ["pattern"]
+          }
+        },
+        "diffInDays": {
+          "returns": "integer",
+          "params": {
+            "type": "object",
+            "properties": { "otherHandle": { "type": "string" } },
+            "required": []
+          }
+        },
+        "isWeekend": { "returns": "boolean", "params": { "type": "object", "properties": {}, "required": [] } },
+        "isPast": { "returns": "boolean", "params": { "type": "object", "properties": {}, "required": [] } },
+        "isFuture": { "returns": "boolean", "params": { "type": "object", "properties": {}, "required": [] } },
+        "isToday": { "returns": "boolean", "params": { "type": "object", "properties": {}, "required": [] } },
+        "setTimezone": {
+          "returns": "DateTime",
+          "params": {
+            "type": "object",
+            "properties": { "timezone": { "type": "string" } },
+            "required": ["timezone"]
+          }
+        },
+        "copy": {
+          "returns": "DateTime",
+          "params": { "type": "object", "properties": {}, "required": [] }
+        },
+        "toIso8601String": {
+          "returns": "string",
+          "params": { "type": "object", "properties": {}, "required": [] }
+        }
+      }
+    }
+  }
+}

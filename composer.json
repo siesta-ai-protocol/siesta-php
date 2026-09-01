@@ -1,0 +1,43 @@
+{
+    "name": "siesta/siesta-php",
+    "description": "PHP implementation of the Siesta protocol",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        { "type": "path", "url": "../siesta-protocol" },
+        { "type": "path", "url": "packages/siesta-runtime" },
+        { "type": "path", "url": "packages/siesta-carbon" }
+    ],
+    "require": {
+        "php": "^8.2",
+        "siesta/protocol": "@dev",
+        "siesta/runtime": "@dev",
+        "siesta/carbon": "@dev",
+        "symfony/console": "^7.0",
+        "symfony/yaml": "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Siesta\\Cli\\": "tools/siesta-cli/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Siesta\\Runtime\\Tests\\": "packages/siesta-runtime/tests/",
+            "Siesta\\Carbon\\Tests\\": "packages/siesta-carbon/tests/"
+        }
+    },
+    "bin": [
+        "tools/siesta-cli/bin/siesta"
+    ],
+    "scripts": {
+        "test": "phpunit",
+        "discover": "php tools/siesta-cli/bin/siesta discover",
+        "validate:all": "php tools/siesta-cli/bin/siesta validate"
+    }
+}

@@ -1,0 +1,11 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+require dirname(__DIR__, 3) . '/vendor/autoload.php';
+
+use Siesta\Cli\Application;
+
+$application = new Application();
+exit($application->run());

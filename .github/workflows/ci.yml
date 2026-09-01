@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+      - run: composer install
+      - run: vendor/bin/phpunit
+      - run: php tools/siesta-cli/bin/siesta manifest:validate packages/siesta-carbon/siesta.manifest.json
+      - run: php tools/siesta-cli/bin/siesta test:scenarios
