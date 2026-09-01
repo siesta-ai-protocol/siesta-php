@@ -10,12 +10,34 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout siesta-protocol
+        uses: actions/checkout@v4
+        with:
+          repository: siesta-ai-protocol/siesta-protocol
+          path: siesta-protocol
+
+      - name: Checkout siesta-php
+        uses: actions/checkout@v4
+        with:
+          path: siesta-php
+
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
           coverage: none
-      - run: composer install
-      - run: vendor/bin/phpunit
-      - run: php tools/siesta-cli/bin/siesta manifest:validate packages/siesta-carbon/siesta.manifest.json
-      - run: php tools/siesta-cli/bin/siesta test:scenarios
+
+      - name: Install dependencies
+        working-directory: siesta-php
+        run: composer install --prefer-dist --no-progress
+
+      - name: Run tests
+        working-directory: siesta-php
+        run: vendor/bin/phpunit
+
+      - name: Validate manifests
+        working-directory: siesta-php
+        run: php tools/siesta-cli/bin/siesta validate
+
+      - name: Run scenarios
+        working-directory: siesta-php
+        run: php tools/siesta-cli/bin/siesta test:scenarios

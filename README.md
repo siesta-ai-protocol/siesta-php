@@ -1,16 +1,19 @@
 # Siesta PHP
 
-PHP reference implementation of the [Siesta protocol](https://github.com/siesta-php/siesta-protocol).
+PHP reference implementation of the [Siesta protocol](https://github.com/siesta-ai-protocol/siesta-protocol).
 
 ## Install
 
+Clone **both** repos as siblings (or use the [Siesta monorepo](https://github.com/siesta-ai-protocol/siesta)):
+
 ```bash
-git clone https://github.com/siesta-php/siesta-php.git
+git clone https://github.com/siesta-ai-protocol/siesta-protocol.git
+git clone https://github.com/siesta-ai-protocol/siesta-php.git
 cd siesta-php
 composer install
 ```
 
-Requires [siesta-protocol](https://github.com/siesta-php/siesta-protocol) as a sibling directory or Composer package for JSON schemas.
+`composer.json` resolves `siesta/protocol` from `../siesta-protocol`.
 
 ## Embed in Your Application
 
