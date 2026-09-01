@@ -143,9 +143,18 @@ final class SiestaKernel
             ];
         }
 
+        $allValid = true;
+
+        foreach ($results as $result) {
+            if (!$result['valid']) {
+                $allValid = false;
+                break;
+            }
+        }
+
         return [
             'siestaVersion' => '1.0',
-            'valid' => array_all($results, static fn (array $r): bool => $r['valid']),
+            'valid' => $allValid,
             'libraries' => $results,
         ];
     }
